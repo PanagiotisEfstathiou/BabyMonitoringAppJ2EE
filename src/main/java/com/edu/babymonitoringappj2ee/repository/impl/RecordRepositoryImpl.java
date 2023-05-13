@@ -45,9 +45,7 @@ public class RecordRepositoryImpl implements RecordRepository {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-
         String sqlCommand = "select * from  Record where id =?;";
-
         try(Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
             PreparedStatement stmt = conn.prepareStatement(sqlCommand,
                     Statement.RETURN_GENERATED_KEYS )){
@@ -60,6 +58,9 @@ public class RecordRepositoryImpl implements RecordRepository {
                 record.setDate(results.getDate("date"));
                 record.setQuantity(results.getDouble("quantity"));
                 return Optional.of(record);
+            }
+            else {
+                return Optional.empty();
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
