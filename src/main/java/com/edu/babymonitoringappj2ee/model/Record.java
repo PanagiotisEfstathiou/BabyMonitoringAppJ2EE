@@ -14,4 +14,5 @@ public class Record {
     private double duration;
     private Date date;
     private double quantity;
+    private Account account;
 }
