@@ -21,12 +21,12 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AccountDto readAccount(int accountId) {
+    public Boolean readAccount(int accountId) {
         Optional<Account> account = accountRepository.findById(accountId);
         if (account.isPresent())
-            return new AccountDto(account.get());
+           return true;
         else
-            return null;
+            return false;
     }
 
     @Override

@@ -8,6 +8,8 @@ public interface RecordService {
 
     RecordDto readRecord(int recordId);
 
+    RecordDto readRecordByAccountId(int accountId);
+
     RecordDto updateRecord(int recordId, RecordDto record);
 
     boolean deleteRecord(int recordId);

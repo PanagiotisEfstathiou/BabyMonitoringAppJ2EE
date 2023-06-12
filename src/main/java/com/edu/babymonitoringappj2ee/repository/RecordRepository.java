@@ -13,4 +13,6 @@ public interface RecordRepository {
     Optional<Record> update(int recordId, Record record);
 
     boolean delete(int recordId);
+
+    Optional<Record> findByAccountId(int accountId);
 }

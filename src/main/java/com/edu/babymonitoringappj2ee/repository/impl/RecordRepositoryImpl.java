@@ -114,4 +114,33 @@ public class RecordRepositoryImpl implements RecordRepository {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public Optional<Record> findByAccountId(int accountId) {
+        try {
+            Class.forName(JDBC_DRIVER);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        String sqlCommand = "select * from  Record where accountId =?;";
+        try(Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            PreparedStatement stmt = conn.prepareStatement(sqlCommand,
+                    Statement.RETURN_GENERATED_KEYS )){
+            stmt.setInt(1,accountId);
+            ResultSet results = stmt.executeQuery();
+            if(results.next()){
+                Record record = new Record();
+                record.setId(results.getInt("id"));
+                record.setDuration(results.getDouble("duration"));
+                record.setDate(results.getDate("date"));
+                record.setQuantity(results.getDouble("quantity"));
+                return Optional.of(record);
+            }
+            else {
+                return Optional.empty();
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

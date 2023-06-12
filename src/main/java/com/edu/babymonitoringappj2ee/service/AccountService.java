@@ -6,7 +6,7 @@ public interface AccountService {
 
     AccountDto saveAccount(AccountDto account);
 
-    AccountDto readAccount(int accountId);
+    Boolean readAccount(int accountId);
 
     AccountDto updateAccount(int accountId, AccountDto account);
 

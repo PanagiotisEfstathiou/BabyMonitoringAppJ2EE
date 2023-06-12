@@ -29,6 +29,15 @@ public class RecordServiceImpl implements RecordService {
     }
 
     @Override
+    public RecordDto readRecordByAccountId(int accountId) {
+        Optional<Record> record = repository.findByAccountId(accountId);
+        if (record.isPresent())
+            return new RecordDto(record.get());
+        else
+            return null;
+    }
+
+    @Override
     public RecordDto updateRecord(int recordId, RecordDto record) {
         Record record1 = record.createRecord();
         return new RecordDto (repository.update(recordId, record1).get());
